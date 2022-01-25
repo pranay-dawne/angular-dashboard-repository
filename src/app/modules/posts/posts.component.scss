@@ -1,0 +1,23 @@
+.mat-raised-button{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+input{
+  width: 50%;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-left: 50px;
+}
+:placeholder-shown{
+  font-size: 20px;
+}
+mat-card-title{
+  font-size: medium;
+}
+ul li{
+  list-style: none;
+}
+mat-card{
+  cursor: pointer;
+}

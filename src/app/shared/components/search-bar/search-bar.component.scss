@@ -1,0 +1,32 @@
+div{
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 60px;
+}
+input{
+  width: 50%;
+  height: 50px;
+  padding: 5px 0px 10px 0px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+:placeholder-shown{
+  font-size: 20px;
+}
+.mat-select-search-input{
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.mat-raised-button{
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  width: 120px;
+  bottom: 5px;
+}
+ul li{
+  list-style: none;
+  padding-right: 0px;
+}

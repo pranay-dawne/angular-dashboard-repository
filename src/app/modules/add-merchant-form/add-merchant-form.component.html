@@ -1,0 +1,37 @@
+<div>
+  <h3 style="text-align: center; font-weight: bold;">MERCHANT SIGNUP</h3>
+  <div>
+  <mat-dialog-content class="mat-typography">
+  <form class="example-form">
+    <div class="parent">
+
+      <mat-form-field [style.width.px]=600>
+        <mat-label>Phone Number</mat-label>
+        <input matInput type="text" required id="phoneNumber" [(ngModel)]="loginRequest.phoneNumber" name="phoneNumber">
+        <span matPrefix>+91</span>
+      </mat-form-field>
+
+        <mat-form-field [style.width.px]=600>
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" required [(ngModel)]="loginRequest.password" name="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Select Role</mat-label>
+        <mat-select id="role" [(ngModel)]="loginRequest.role" name="role">
+          <mat-option value="ROLE_MERCHANT">ROLE_MERCHANT</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button matDialogClose> Close </button>
+  <button mat-raised-button matDialogClose=""color="primary" type="submit"  (click) = "saveMerchant()"> Save </button>
+</mat-dialog-actions>
+</div>

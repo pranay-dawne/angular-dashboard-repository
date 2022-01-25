@@ -1,0 +1,207 @@
+<div class="container" style="padding-bottom: 20px;">
+  <mat-card [class.mat-elevation-z8]="true">
+    <mat-card-title>Name: {{user?.fullName}}</mat-card-title>
+    <br>
+    <mat-card-title>User ID: {{user?.userId}}</mat-card-title>
+    <br>
+    <mat-card-title>Registered Number: {{user?.phone}}</mat-card-title>
+    <br>
+    <mat-card-title>Default Address: {{defaultAddress?.completeAddress}}, {{defaultAddress?.locality}}, {{defaultAddress?.city}}, {{defaultAddress?.state}}, {{defaultAddress?.pincode}}</mat-card-title>
+  </mat-card>
+</div>
+
+<mat-tab-group>
+<!-- Current Orders -->
+  <mat-tab label="CURRENT ORDER">
+    <br>
+    <div class="container" *ngFor="let order of orderList">
+      <div *ngIf="order.orderStatus==='Order Placed'
+      ||order.orderStatus==='Order Accepted'
+      ||order.orderStatus==='Out  For Delivery'">
+      <mat-card [class.mat-elevation-z8]="true">
+      <table class="table table-bordered" style="width: 100%;text-align: center;">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Order ID</th>
+            <th>Order Status</th>
+            <th>Transaction ID</th>
+            <th>Transaction Mode</th>
+            <th>Transaction Status</th>
+            <th>Delivery Address</th>
+            <th>Merchant Name</th>
+            <th>No. of Items</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{order?.date}}</td>
+            <td>{{order?.orderId}}</td>
+            <td>{{order?.orderStatus}}</td>
+            <td>{{order?.transactionId}}</td>
+            <td>{{order?.transactionMode}}</td>
+            <td>{{order?.transactionStatus}}</td>
+            <td>{{order?.userAddress}}</td>
+            <td>{{order?.merchantName}}</td>
+            <td>{{order?.numberOfItems}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+    <mat-accordion>
+      <mat-expansion-panel [class.mat-elevation-z8]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="text-align: center;">
+            Items
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <table class="table table-bordered" style="width: 100%;">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Sub-Category</th>
+                <th>Item Name</th>
+                <th>Size</th>
+                <th>MRP</th>
+                <th>Discount%</th>
+                <th>Price After Discount</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order?.items let i=index" [attr.data-index]="i">
+                <td>{{i+1}}</td>
+                <td>{{item?.category}}</td>
+                <td>{{item?.itemName}}</td>
+                <td>{{item?.size}}</td>
+                <td>{{item?.price}}</td>
+                <td>{{item?.discount}}</td>
+                <td>{{item?.discountedPrice}}</td>
+                <td>{{item?.quantity}}</td>
+                <td>{{item?.priceAsPerQuantity}}</td>
+                <td>{{item?.itemStatus}}</td>
+                <td>
+                  <button mat-raised-button>Accept</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+  </div>
+    </div>
+    <div *ngIf="isLoading" style="align-items: center; justify-content: center; display: flex;">
+      <mat-spinner [diameter]="50" mode="indeterminate"></mat-spinner>
+    </div>
+  </mat-tab>
+
+<!-- Order History -->
+  <mat-tab label="ORDER HISTORY">
+    <br>
+    <div class="container" name="order history" *ngFor="let order of orderList">
+      <div *ngIf="order.orderStatus==='Order Completed'||order.orderStatus==='Order Cancelled'">
+      <mat-card [class.mat-elevation-z8]="true">
+      <table class="table table-bordered" style="width: 100%; text-align: center;">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Order ID</th>
+            <th>Order Status</th>
+            <th>Transaction ID</th>
+            <th>Transaction Mode</th>
+            <th>Transaction Status</th>
+            <th>Delivery Address</th>
+            <th>Merchant Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{order?.date}}</td>
+            <td>{{order?.orderId}}</td>
+            <td>{{order?.orderStatus}}</td>
+            <td>{{order?.transactionId}}</td>
+            <td>{{order?.transactionMode}}</td>
+            <td>{{order?.transactionStatus}}</td>
+            <td>{{order?.userAddress}}</td>
+            <td>{{order?.merchantName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+
+      <mat-accordion>
+        <mat-expansion-panel [class.mat-elevation-z8]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Items
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <table class="table table-bordered" style="width: 100%;">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Item</th>
+                  <th>Size</th>
+                  <th>Quantity</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of order?.items let index = i" [attr.data-index]="i">
+                  <td>{{i+1}}</td>
+                  <td>{{item?.itemName}}</td>
+                  <td>{{item?.size}}</td>
+                  <td>{{item?.quantity}}</td>
+                  <td>{{item?.itemStatus}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+    </div>
+    </div>
+  </mat-tab>
+
+<!-- Profile -->
+  <mat-tab label="PROFILE" >
+    <br>
+    <div class="container">
+    <mat-card [class.mat-elevation-z8]="true">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th style="width: 30%;">User ID</th>
+            <td style="width: 70%;">{{userLogin?.userId}}</td>
+          </tr>
+          <tr>
+            <th style="width: 30%;">Current OTP</th>
+            <td style="width: 70%;">{{userLogin?.otpCode}}</td>
+          </tr>
+          <tr>
+            <th style="width: 30%;">Name</th>
+            <td style="width: 70%;">{{user?.fullName}}</td>
+          </tr>
+          <tr>
+            <th style="width: 30%;">Email</th>
+            <td style="width: 70%;">{{user?.email}}</td>
+          </tr>
+          <tr>
+            <th style="width: 30%;">Verified User</th>
+            <td style="width: 70%;" *ngIf="userLogin?.verification==='done'">true</td>
+            <td style="width: 70%;" *ngIf="userLogin?.verification==='pending'">false</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+    <br>
+  </div>
+  </mat-tab>
+</mat-tab-group>

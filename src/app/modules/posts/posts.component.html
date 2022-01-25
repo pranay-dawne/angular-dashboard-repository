@@ -1,0 +1,29 @@
+<div>
+  <button mat-raised-button color="primary" (click)="onAddEmloyee()">+ ADD MERCHANT</button>
+  <input type="text" placeholder="search"/>
+  <button name="search" mat-raised-button color="primary">Search</button>
+</div>
+
+<div>
+  <mat-tab-group>
+    <mat-tab label="Merchants">
+      <div class="container" *ngFor="let merchant of merchantList">
+        <br>
+        <mat-card (click)="onClickToMerchant(merchant?.merchantId)" [class.mat-elevation-z5]="true"
+        matRipple [matRippleCentered]="true">
+          <div>
+          <ul>
+            <li>
+              {{merchant?.merchantId}}
+            </li>
+            <br>
+            <li style="font-size: large; font-weight: bold;">
+              {{merchant?.merchantName}}
+            </li>
+          </ul>
+        </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

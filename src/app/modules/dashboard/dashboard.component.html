@@ -1,0 +1,18 @@
+<div>
+  <input type="text" placeholder="search"/>
+  <button name="search" mat-raised-button color="primary">Search</button>
+</div>
+<div>
+  <mat-tab-group>
+    <mat-tab label="USERS">
+      <div class="example-container" *ngFor="let user of userList">
+          <mat-card (click)="onClickToUser(user?.userId)" [class.mat-elevation-z5]="true" matRipple [matRippleCentered]="true">
+           <mat-card-title align = "middle">{{user?.fullName}}</mat-card-title>
+            <br>
+           <mat-card-subtitle align = "middle">{{user?.userId}}</mat-card-subtitle>
+           <mat-card-subtitle align = "middle">{{user?.phone}}</mat-card-subtitle>
+         </mat-card>
+     </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
